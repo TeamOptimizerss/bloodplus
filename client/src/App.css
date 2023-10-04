@@ -140,10 +140,20 @@ body{
   color: var(--green-color);
   font-size: 25px;
   margin: 10px 0;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.side-nav li i.fa-solid.fa-door-open{
+  color: var(--red-color);
+}
+
+.side-nav li i:hover{
+  color: var(--red-color);
 }
 
 .side-nav.open {
-  width: 300px;
+  width: 450px;
 }
 
 .side-nav ul {
@@ -155,5 +165,112 @@ body{
   padding: 10px;
 }
 
+.side-nav-div{
+  padding: 20px;
+}
 
+.side-nav-div .search-section input{
+  all: unset;
+  margin-left: 100px;
+}
+
+.side-nav-div .search-section{
+  height: 40px;
+  width: 350px;
+  border: 2px solid var(--black-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.side-nav-div .search-section label i{
+  font-size: 20px;
+  color: var(--red-color);
+  cursor: pointer;
+}
+
+
+.filter{
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background-color: var(--red-color);
+  width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 0 0 0px;
+  color: var(--white-color);
+}
+
+.filter i{
+  padding-right: 5px;
+}
+
+.filter-options{
+  background-color: var(--light-red-color);
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+  border-radius: 0 0 5px 5px;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+.filter-options li{
+  border-bottom: 2px solid var(--red-color);
+  border-radius: 0 0 5px 5px;
+}
+
+.hide-icons-section{
+  margin: 20px;
+  color: var(--black-color);
+}
+
+.hide-icons-section label{
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#bloodlabel i{
+  color: var(--red-color);
+  font-size: 20px;
+}
+
+#hospitallabel i{
+  color: var(--green-color);
+  font-size: 18px;  
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--black-color);
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--red-color);
+}
+
+.feedback-section{
+  margin: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  color: var(--black-color);
+}
+
+.feedback-section .feedback-text{
+  padding: 50px 0px;
+}
 /* side nav */
