@@ -4,35 +4,10 @@ import AutofillCheckoutDemo from "./AutofillCheckout";
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState("Group");
-  const filterRef = useRef(null);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    setIsFilterOpen(false);
   };
-
-  const toggleFilter = () => {
-    setIsFilterOpen(!isFilterOpen);
-  };
-
-  const handleFilterClick = (filter) => {
-    setSelectedFilter(filter);
-    toggleFilter();
-  };
-
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (filterRef.current && !filterRef.current.contains(event.target)) {
-        setIsFilterOpen(false);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
 
   return (
     <Fragment>
