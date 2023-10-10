@@ -171,7 +171,9 @@ body{
 
 .side-nav-div .search-section input{
   all: unset;
-  margin-left: 100px;
+  width: 75%;
+  color: var(--black-color);
+  margin-left: 50px;
 }
 
 .side-nav-div .search-section{
@@ -183,6 +185,12 @@ body{
   justify-content: center;
   align-items: center;
   position: relative;
+}
+
+.side-nav .search-section label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .side-nav-div .search-section label i{
@@ -198,17 +206,13 @@ body{
   left: 0;
   text-align: center;
   background-color: var(--red-color);
-  width: 100px;
+  width: 50px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0px 0 0 0px;
   color: var(--white-color);
-}
-
-.filter i{
-  padding-right: 5px;
 }
 
 .filter-options{
@@ -274,3 +278,56 @@ input[type="radio"]:checked {
   padding: 50px 0px;
 }
 /* side nav */
+
+/* none*/
+.mapboxgl-control-container{
+  display: none;
+}
+/* map-container */
+
+
+/* footer */
+.footer{
+  height: 200px;
+  background:linear-gradient(90deg,var(--white-color),var(--red-color));
+}
+
+/* Add the glow effect */
+.glow {
+  animation: glow-animation 1s infinite alternate;
+}
+
+/* Add the glow effect */
+.glow {
+  animation: glow-animation 1s infinite alternate;
+}
+
+/* Define the glow animation */
+@keyframes glow-animation {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Initial glow */
+  }
+  100% {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 1); /* Maximum glow */
+  }
+}
+
+
+/* floating icon */
+
+.floating-icon{
+  position: absolute;
+  z-index: 2;
+  right: 3%;
+  bottom: 7%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--red-color);
+  color: var(--white-color);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px var(--dark-shadow-color);
+}

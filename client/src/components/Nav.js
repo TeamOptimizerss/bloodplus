@@ -1,14 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import BloodplusLogo from "../images/Bloodpluslogo.png";
+import { useEventTrigger } from "./EventTriggerContext";
 
 const Nav = () => {
   const savedTheme = localStorage.getItem("theme");
   const [isDarkMode, setIsDarkMode] = useState(savedTheme === "dark");
+  const { themeTrigger, setThemeTrigger } = useEventTrigger();
 
   const toggleMode = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setIsDarkMode(!isDarkMode);
+    setThemeTrigger(!themeTrigger);
     localStorage.setItem("theme", newTheme);
   };
 
@@ -36,9 +39,9 @@ const Nav = () => {
             <span onClick={toggleMode}>
               <span className="thememode">
                 {isDarkMode ? (
-                  <i className="fa-regular fa-sun"></i>
+                  <i className="fa-solid fa-lightbulb glow"></i>
                 ) : (
-                  <i className="fa-regular fa-moon"></i>
+                  <i className="fa-regular fa-lightbulb"></i>
                 )}
               </span>
             </span>
