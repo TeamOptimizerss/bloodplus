@@ -49,33 +49,40 @@ const Map = () => {
 
     map.addControl(drawRef.current);
 
-    map.on("load", () => {
-      const circleFeature = {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [longitude, latitude],
-        },
-        properties: {},
-      };
+    map.on("load", async () => {
+      try {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+        const { latitude, longitude } = position.coords;
+        const circleFeature = {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [longitude, latitude],
+          },
+          properties: {},
+        };
 
-      map.addSource("circle-source", {
-        type: "geojson",
-        data: circleFeature,
-      });
+        map.addSource("circle-source", {
+          type: "geojson",
+          data: circleFeature,
+        });
 
-      circleLayerRef.current = map.addLayer({
-        id: "circle-layer",
-        type: "circle",
-        source: "circle-source",
-        paint: {
-          "circle-radius": calculateCircleRadius(map.getZoom()), // Set initial radius
-          "circle-color": "#0074e4",
-          "circle-opacity": 0.2,
-        },
-      });
-
-      drawRef.current.add(circleFeature);
+        circleLayerRef.current = map.addLayer({
+          id: "circle-layer",
+          type: "circle",
+          source: "circle-source",
+          paint: {
+            "circle-radius": calculateCircleRadius(map.getZoom()), // Set initial radius
+            "circle-color": "#0074e4",
+            "circle-opacity": 0.2,
+          },
+        });
+        drawRef.current.add(circleFeature);
+      } catch (error) {
+        console.error("Error getting user's location:", error);
+      }
 
       // Listen for the map's zoom event and update the circle's radius
       map.on("zoom", () => {
@@ -144,7 +151,20 @@ const Map = () => {
       const { latitude, longitude } = userLocation;
       initializeMap(latitude, longitude);
     }
-  }, [themeTrigger, userLocation, isDarkMode]);
+  }, [themeTrigger, isDarkMode]);
+
+  useEffect(() => {
+    if (userLocation) {
+      const { latitude, longitude } = userLocation;
+      if (mapRef.current) {
+        mapRef.current.flyTo({
+          center: [longitude, latitude],
+          zoom: 12,
+          essential: true,
+        });
+      }
+    }
+  }, [userLocation]);
 
   return (
     <div className="map-container">

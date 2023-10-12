@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-transform: uppercase;
 }
 
 /* color - pallete */
@@ -330,4 +331,15 @@ input[type="radio"]:checked {
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 2px 2px 2px var(--dark-shadow-color);
+}
+
+/* signup */
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container input{
+  display: block;
 }
