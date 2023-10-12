@@ -135,6 +135,7 @@ body{
   box-shadow: 1px 0 5px var(--light-shadow-color);
   transition: all 0.3s ease;
   display: flex;
+  z-index: 900;
 }
 
 .side-nav li i{
@@ -280,11 +281,15 @@ input[type="radio"]:checked {
 }
 /* side nav */
 
+
 /* none*/
 .mapboxgl-control-container{
   display: none;
 }
 /* map-container */
+.map-container{
+  margin-left: 50px;
+}
 
 
 /* footer */

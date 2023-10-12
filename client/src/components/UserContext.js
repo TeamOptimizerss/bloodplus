@@ -17,9 +17,32 @@ export const UserProvider = ({ children }) => {
     localStorage.getItem("theme") || ""
   );
 
-  const [coordinates, setCoordinates] = useState(
-    localStorage.getItem("cordinates") || null
-  );
+  // Initialize coordinates
+  const [coordinates, setCoordinates] = useState(() => {
+    const storedCoordinates = localStorage.getItem("coordinates");
+    if (storedCoordinates) {
+      return JSON.parse(storedCoordinates);
+    } else {
+      return null; // Initial value is set to null
+    }
+  });
+
+  // Attempt to get the user's current location and update coordinates
+  useEffect(() => {
+    if (coordinates === null) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const userCoordinates = [longitude, latitude];
+          setCoordinates(userCoordinates);
+          localStorage.setItem("coordinates", JSON.stringify(userCoordinates));
+        },
+        (error) => {
+          console.error("Error getting user's location:", error);
+        }
+      );
+    }
+  }, [coordinates]);
 
   // Save user data to localStorage whenever they change
   useEffect(() => {
@@ -27,11 +50,10 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem("userEmail", userEmail);
       localStorage.setItem("userName", userName);
       localStorage.setItem("theme", isDarkMode);
-      localStorage.setItem("cordinates", coordinates);
     } catch (error) {
       console.error("Error saving user data to localStorage:", error);
     }
-  }, [userEmail, userName, isDarkMode, coordinates]);
+  }, [userEmail, userName, isDarkMode]);
 
   return (
     <UserContext.Provider
