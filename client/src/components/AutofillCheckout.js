@@ -38,9 +38,7 @@ export default function AutofillCheckout() {
 
       if (data.features && data.features.length > 0) {
         const coordinates = data.features[0].center;
-        setCoordinates(coordinates); // Set the coordinates in state
-        console.log("Location selected:", selectedLocation);
-        console.log("Coordinates:", coordinates);
+        setCoordinates(coordinates);
       } else {
         console.error("Location not found.");
       }

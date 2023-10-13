@@ -348,3 +348,94 @@ input[type="radio"]:checked {
 .form-container input{
   display: block;
 }
+
+.loading{
+  height: 86vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
+}
+
+.container {
+  position: relative;
+  width: 300px; 
+  height: 300px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.blood-shape{
+  position: absolute;
+  height: 300px;
+  width: 300px;
+}
+
+.blood-shape img{
+  height: 300px;
+  width: 300px;
+  filter: drop-shadow(5px 5px 5px var(--dark-shadow-color));
+}
+
+.blood-outline{
+  position: absolute;
+  height: 350px;
+  width: 350px;
+}
+
+.blood-outline .img{
+  height: 350px;
+  width: 350px;
+  -webkit-clip-path: polygon(0% 0%, 0% 100%, 12% 100%, 12% 12%, 89% 12%, 89% 90%, 11% 90%, 12% 100%, 100% 100%, 100% 0%);
+clip-path: polygon(0% 0%, 0% 100%, 12% 100%, 12% 12%, 89% 12%, 89% 90%, 11% 90%, 12% 100%, 100% 100%, 100% 0%);
+background-color: var(--body-color);
+}
+
+.blood-outline p{
+  width: 600px;
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--black-color);
+}
+
+.water-effect {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 130%;
+  animation: stretch 5s ease-in-out infinite;
+}
+
+.water-effect .waves {
+  height: 100px;
+  background-color: var(--red-color);
+  animation: waves 2s ease-in-out infinite;
+}
+
+.water-effect .water {
+  height: calc(100% - 100px);
+  margin-top: -1px;
+  background-color: var(--red-color);
+}
+
+@keyframes waves {
+  0%, 100% {
+    clip-path: polygon(0 8%, 7% 6%, 14% 5%, 21% 5%, 28% 6%, 34% 8%, 40% 12%, 46% 17%, 50% 20%, 54% 23%, 60% 25%, 66% 26%, 70% 26%, 77% 25%, 83% 23%, 89% 21%, 95% 19%, 100% 17%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0 15%, 9% 21%, 14% 23%, 18% 25%, 21% 26%, 30% 28%, 32% 28%, 40% 27%, 46% 26%, 52% 23%, 57% 19%, 62% 15%, 68% 11%, 73% 8%, 79% 6%, 86% 5%, 93% 5%, 100% 6%, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes stretch {
+  0% {
+    bottom: -130%;
+  }
+
+  100% {
+    bottom: -1px;
+  }
+}

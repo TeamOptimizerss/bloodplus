@@ -37,7 +37,7 @@ const SideNav = () => {
             <AutofillCheckoutDemo></AutofillCheckoutDemo>
             <div className="hide-icons-section">
               <h3>
-                Hide Icons <i class="fa-regular fa-eye-slash"></i>
+                Hide Icons <i className="fa-regular fa-eye-slash"></i>
               </h3>
               <input type="radio" name="bloodhosp" id="blood" />
               <label htmlFor="blood" id="bloodlabel">

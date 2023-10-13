@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Map from "../components/Map";
 import { useUserContext } from "../components/UserContext";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const { coordinates } = useUserContext();
@@ -12,7 +13,7 @@ const Home = () => {
     }
   }, [coordinates]);
 
-  return <Fragment>{isLoading ? <div>Loading...</div> : <Map></Map>}</Fragment>;
+  return <Fragment>{isLoading ? <Loading></Loading> : <Map></Map>}</Fragment>;
 };
 
 export default Home;

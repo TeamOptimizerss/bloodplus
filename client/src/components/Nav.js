@@ -11,7 +11,7 @@ const Nav = () => {
   const toggleMode = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setIsDarkMode(!isDarkMode);
-    setThemeTrigger(!themeTrigger);
+    setThemeTrigger(!isDarkMode);
     localStorage.setItem("theme", newTheme);
   };
 

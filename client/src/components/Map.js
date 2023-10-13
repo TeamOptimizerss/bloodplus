@@ -126,7 +126,6 @@ const Map = () => {
 
   useEffect(() => {
     if (coordinates !== null) {
-      console.log(coordinates);
       try {
         const latitude = coordinates[1];
         const longitude = coordinates[0];
