@@ -46,16 +46,29 @@ const Nav = () => {
               </span>
             </span>
             <li>
-              <NavLink to="/signup">Be a Donor</NavLink>
+              <NavLink
+                to="/donors/signup"
+                className="btn-flip"
+                data-back="Back"
+                data-front="Front"
+              >
+                <span>Be a Donor</span>
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/login">Already a Donor</NavLink>
+              <NavLink to="/donors/login">
+                <span>Already a Donor</span>
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/aboutus">About Us</NavLink>
+              <NavLink to="/aboutus">
+                <span>About Us</span>
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/contactus">Contact Us</NavLink>
+              <NavLink to="/contactus">
+                <span>Contact Us</span>
+              </NavLink>
             </li>
           </ul>
         </div>

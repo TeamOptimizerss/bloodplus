@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useEffect } from "react";
 import {
   AddressAutofill,
-  AddressMinimap,
   useConfirmAddress,
   config,
 } from "@mapbox/search-js-react";
+import { toast } from "react-toastify"; // Import toast from the toast library
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AutoSignupFill() {
   const [showFormExpanded, setShowFormExpanded] = useState(false);
-  const [showMinimap, setShowMinimap] = useState(false);
-  const [feature, setFeature] = useState();
-  const [showValidationText, setShowValidationText] = useState(false);
   const [token, setToken] = useState("");
+  const [location, setLocation] = useState("");
+  const [coordinates, setCoordinates] = useState(null);
 
   useEffect(() => {
     const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -20,151 +20,162 @@ export default function AutoSignupFill() {
   }, []);
 
   const { formRef, showConfirm } = useConfirmAddress({
-    minimap: true,
-    skipConfirmModal: (feature) => {
-      ["exact", "high"].includes(feature.properties.match_code.confidence);
-    },
+    skipConfirmModal: (feature) =>
+      ["exact", "high"].includes(feature.properties.match_code.confidence),
   });
 
-  const handleRetrieve = useCallback(
-    (res) => {
-      const feature = res.features[0];
-      setFeature(feature);
-      setShowMinimap(true);
-      setShowFormExpanded(true);
-    },
-    [setFeature, setShowMinimap]
-  );
+  const handleRetrieve = useCallback((res) => {
+    const feature = res.features[0];
+    setLocation(feature.place_name);
+  }, []);
 
-  function handleSaveMarkerLocation(coordinate) {
-    console.log(`Marker moved to ${JSON.stringify(coordinate)}.`);
-  }
+  const getCoordinatesForAddress = async (address) => {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          address
+        )}.json?access_token=${token}`
+      );
+      const data = await response.json();
+
+      if (data.features && data.features.length > 0) {
+        const coordinates = data.features[0].center;
+        setCoordinates(coordinates);
+      } else {
+        toast.error("Location not found."); // Show an error toast
+        console.error("Location not found.");
+      }
+    } catch (error) {
+      toast.error("Error fetching coordinates: " + error.message); // Show an error toast
+      console.error("Error fetching coordinates:", error);
+    }
+  };
 
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      const result = await showConfirm();
-      if (result.type === "nochange") submitForm();
+      if (location.trim() === "") {
+        toast.error("Please enter a location.");
+      } else {
+        await showConfirm();
+        setShowFormExpanded(false);
+        getCoordinatesForAddress(location);
+      }
     },
-    [showConfirm]
+    [showConfirm, location]
   );
 
-  function submitForm() {
-    setShowValidationText(true);
-    setTimeout(() => {
-      resetForm();
-    }, 2500);
-  }
-
-  function resetForm() {
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => (input.value = ""));
-    setShowFormExpanded(false);
-    setShowValidationText(false);
-    setFeature(null);
-  }
-
   return (
-    <>
-      <form ref={formRef} className="flex flex--column" onSubmit={handleSubmit}>
+    <div>
+      <form
+        ref={formRef}
+        className="flex flex--column form-container"
+        onSubmit={handleSubmit}
+      >
         <div className="grid grid--gut24 mb60">
           <div className="col col--auto-mm w-full">
-            <AddressAutofill accessToken={token} onRetrieve={handleRetrieve}>
-              <div className="search-section">
-                <input
-                  className="input mb12"
-                  placeholder="Start typing your address..."
-                  autoComplete="address-line1"
-                  id="mapbox-autofill"
-                />
-                <label htmlFor="search">
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </label>
-              </div>
-            </AddressAutofill>
-            {!showFormExpanded && (
+            {!showFormExpanded ? (
               <div
                 id="manual-entry"
                 className="w180 mt6 link txt-ms border-b color-gray color-black-on-hover"
                 onClick={() => setShowFormExpanded(true)}
               >
-                Enter an address manually
+                <i className="fa-regular fa-keyboard"></i> Enter an address
+                manually
               </div>
-            )}
+            ) : null}
+
             <div
               className="secondary-inputs"
               style={{ display: showFormExpanded ? "block" : "none" }}
             >
-              <label className="txt-s txt-bold color-gray mb3">
-                Address Line 2
-              </label>
-              <input
-                className="input mb12"
-                placeholder="Apartment, suite, unit, building, floor, etc."
-                autoComplete="address-line2"
-              />
-              <label className="txt-s txt-bold color-gray mb3">City</label>
-              <input
-                className="input mb12"
-                placeholder="City"
-                autoComplete="address-level2"
-              />
-              <label className="txt-s txt-bold color-gray mb3">
-                State / Region
-              </label>
-              <input
-                className="input mb12"
-                placeholder="State / Region"
-                autoComplete="address-level1"
-              />
-              <label className="txt-s txt-bold color-gray mb3">
-                ZIP / Postcode
-              </label>
-              <input
-                className="input"
-                placeholder="ZIP / Postcode"
-                autoComplete="postal-code"
-              />
-            </div>
-          </div>
-          <div className="col col--auto-mm">
-            {/* Visual confirmation map */}
-            <div id="minimap-container" className="h240 w360 relative mt18">
-              <AddressMinimap
-                canAdjustMarker={true}
-                satelliteToggle={true}
-                feature={feature}
-                show={showMinimap}
-                onSaveMarkerLocation={handleSaveMarkerLocation}
-              />
+              <AddressAutofill accessToken={token} onRetrieve={handleRetrieve}>
+                <div className="search-section inputs">
+                  <label htmlFor="mapbox-autofill">
+                    <i className="fa-solid fa-location-dot"></i>
+                  </label>
+                  <input
+                    className="input mb12"
+                    placeholder="Start typing your address..."
+                    autoComplete="address-line1"
+                    id="mapbox-autofill"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                  />
+                </div>
+              </AddressAutofill>
+              <div className="inputs">
+                <label className="txt-s txt-bold color-gray mb3">
+                  <i className="fa-solid fa-address-book"></i>
+                </label>
+                <input
+                  className="input mb12"
+                  placeholder="Apartment, suite, unit, building, floor, etc."
+                  autoComplete="address-line2"
+                />
+              </div>
+              <div className="inputs">
+                <label className="txt-s txt-bold color-gray mb3">
+                  <i className="fa-solid fa-city"></i>
+                </label>
+                <input
+                  className="input mb12"
+                  placeholder="City"
+                  autoComplete="address-level2"
+                />
+              </div>
+              <div className="inputs">
+                <label className="txt-s txt-bold color-gray mb3">
+                  <i className="fa-solid fa-earth-asia"></i>
+                </label>
+                <input
+                  className="input mb12"
+                  placeholder="State / Region"
+                  autoComplete="address-level1"
+                />
+              </div>
+              <div className="inputs">
+                <label className="txt-s txt-bold color-gray mb3">
+                  <i className="fa-solid fa-map-pin"></i>
+                </label>
+                <input
+                  className="input"
+                  placeholder="ZIP / Postcode"
+                  autoComplete="postal-code"
+                />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Form buttons */}
-        {showFormExpanded && (
+        {showFormExpanded ? (
           <div className="mb30 submit-btns">
             <button type="submit" className="btn round" id="btn-confirm">
-              Confirm
+              <span>
+                <i className="fa-solid fa-check success"></i> Confirm
+              </span>
             </button>
             <button
               type="button"
               className="btn round btn--gray-light ml3"
               id="btn-reset"
-              onClick={resetForm}
+              onClick={() => setShowFormExpanded(false)}
             >
-              Reset
+              <span>
+                <i className="fa-regular fa-circle-xmark red"></i> Close
+              </span>
             </button>
           </div>
-        )}
+        ) : null}
       </form>
 
-      {/* Validation text */}
-      {showValidationText && (
-        <div id="validation-msg" className="mt24 txt-m txt-bold">
-          Order successfully submitted.
+      {/* Coordinates */}
+      {coordinates && (
+        <div className="mt24">
+          <p className="success">Your are now ready to became a Donor ❤️</p>
         </div>
       )}
-    </>
+    </div>
   );
 }

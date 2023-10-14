@@ -9,6 +9,11 @@ import SideNav from "./components/SideNav";
 import Footer from "./components/Footer";
 import { UserProvider } from "./components/UserContext";
 import { EventTriggerProvider } from "./components/EventTriggerContext";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SignUpForm from "./components/SignUpForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
@@ -20,10 +25,14 @@ function App() {
             <SideNav></SideNav>
             <Routes>
               <Route exact path="/" element={<Home />} />
-              <Route exact path="/signup" element={<Signup />} />
+              <Route exact path="/donors" element={<Signup />}>
+                <Route path="signup" element={<SignUpForm />} />
+                <Route path="login" element={<LoginForm />} />
+              </Route>
               <Route exact path="/aboutus" element={<AboutUs />} />
             </Routes>
             <Footer></Footer>
+            <ToastContainer />
           </Router>
         </Fragment>
       </EventTriggerProvider>

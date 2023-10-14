@@ -1,10 +1,9 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import AutofillCheckoutDemo from "./AutofillCheckout";
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -16,20 +15,30 @@ const SideNav = () => {
           <li>
             <Link onClick={toggleSidebar}>
               {isOpen ? (
-                <i className="fa-solid fa-door-open"></i>
+                <div className="icon icon-fill">
+                  <i className="fa-solid fa-door-open"></i>
+                </div>
               ) : (
-                <i className="fa-solid fa-door-closed"></i>
+                <div className="icon icon-fill">
+                  <i className="fa-solid fa-door-closed"></i>
+                </div>
               )}
             </Link>
           </li>
           <li>
-            <i className="fa-solid fa-heart"></i>
+            <div className="icon icon-fill">
+              <i className="fa-solid fa-heart"></i>
+            </div>
           </li>
           <li>
-            <i className="fa-solid fa-share"></i>
+            <div className="icon icon-fill">
+              <i className="fa-solid fa-share"></i>
+            </div>
           </li>
           <li>
-            <i className="fa-solid fa-bullhorn"></i>
+            <div className="icon icon-fill">
+              <i className="fa-solid fa-bullhorn"></i>
+            </div>
           </li>
         </ul>
         {isOpen && (
@@ -58,7 +67,9 @@ const SideNav = () => {
                 thoughts, please feel free to let us know. We appreciate your
                 input in making our platform even better for you and others.
               </div>
-              <button className="btn green feedback">FeedBack</button>
+              <button className="btn green feedback">
+                <span>FeedBack</span>
+              </button>
             </div>
           </div>
         )}

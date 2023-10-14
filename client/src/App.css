@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  text-transform: uppercase;
 }
 
 /* color - pallete */
@@ -16,6 +15,7 @@
   --light-shadow-color: rgba(0, 0, 0, 0.3);
   --dark-shadow-color: rgba(0, 0, 0, 0.6);
   --body-color: #ffffff;
+  --sucess: green;
 }
 
 [theme="dark"]{
@@ -49,6 +49,7 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: uppercase;
   padding: 5px 30px;
   box-shadow: 0 1px 3px var(--light-shadow-color);
 }
@@ -89,7 +90,7 @@ body{
 .nav a{
   text-decoration: none;
 }
-.nav ul a, .btn{
+.nav ul a,.btn{
   text-decoration: none;
   color: var(--black-color);
   background-color: var(--white-color);
@@ -104,9 +105,41 @@ body{
   padding: 0 10px;
   transition: all 0.5s;
 }
-.nav ul a.active, .nav ul a:hover, .btn:hover{
+
+.nav ul a:hover, .nav ul a.active, .btn:hover{
   background-color: var(--green-color);
   box-shadow: 3px 3px 3px var(--dark-shadow-color);
+}
+.nav ul a, .btn{
+  position: relative;
+  transition: all .35s;
+  
+}
+
+.nav ul a span, .btn span{
+  position: relative;
+  z-index: 2;
+  font-size: 16px;
+}
+
+.nav ul a:after, .btn:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--green-color);
+  transition: all .35s;
+  border-radius: 5px;
+}
+
+.nav ul a:hover{
+  color: var(--white-color);
+}
+
+.nav ul a:hover:after, .btn:hover:after{
+  width: 100%;
 }
 
 .btn.green{
@@ -126,7 +159,7 @@ body{
 
 /* side nav */
 .side-nav {
-  width: 50px;
+  /* width: 50px; */
   height: 100vh;
   background-color: var(--white-color);
   position: fixed;
@@ -139,19 +172,20 @@ body{
 }
 
 .side-nav li i{
-  color: var(--green-color);
-  font-size: 25px;
+  color: var(--red-color);
+  /* font-size: 25px; */
   margin: 10px 0;
   transition: all 0.5s;
   cursor: pointer;
+  /* filter: drop-shadow( 2px 2px 2px var(--dark-shadow-color)); */
 }
 
 .side-nav li i.fa-solid.fa-door-open{
-  color: var(--red-color);
+  color: var(--green-color);
 }
 
 .side-nav li i:hover{
-  color: var(--red-color);
+  color: var(--green-color);
 }
 
 .side-nav.open {
@@ -283,12 +317,12 @@ input[type="radio"]:checked {
 
 
 /* none*/
-.mapboxgl-control-container{
+a.mapboxgl-ctrl-logo, button.mapbox-gl-draw_trash,div.mapboxgl-ctrl-attrib-inner{
   display: none;
 }
 /* map-container */
 .map-container{
-  margin-left: 50px;
+  margin-left: 60px;
 }
 
 
@@ -340,14 +374,231 @@ input[type="radio"]:checked {
 
 /* signup */
 
+.in-container{
+  margin-left: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signup-form{
+  margin:  0 100px;
+}
+
+.signup-form h1, .signup-form p{
+  text-align: center;
+  color: var(--black-color);
+}
+
 .form-container{
   display: flex;
+  color: var(--black-color);
   flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .form-container input{
   display: block;
+  height: 40px;
+  width: 320px;
+  border-radius: 0 5px 5px 0;
+  padding: 10px;
+  margin: 5px 0;
+  border: 2px solid var(--light-red-color);
 }
+
+.form-container input[type="checkbox"]{
+  height: 15px;
+  width: 15px;
+}
+
+.form-container input[type="radio"]{
+  height: 15px;
+  width: 15px;
+}
+
+.checkbox{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 350px;
+}
+
+.checkbox label{
+  padding-left: 10px;
+}
+
+.checkbox label a{
+  text-decoration: none;
+  color: var(--red-color);
+  transition: 0.5s all;
+}
+
+.checkbox label a:hover{
+  color: var(--green-color);
+}
+
+.signup-side img{
+  height: 650px;
+}
+
+.red{
+  color: var(--red-color);
+}
+
+.bloodgroup-tiles{
+  display: flex;
+  margin: 5px 0;
+}
+
+.form-container input:focus{
+  outline: none;
+  border: 2px solid var(--red-color);
+}
+
+.bloodgroup-tile{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: var(--light-red-color);
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+  border-radius: 5px;
+  transition: 0.5s all;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.bloodgroup-tile.selected, .bloodgroup-tile:hover{
+  background-color: var(--red-color);
+  color: var(--white-color);
+  box-shadow: 2px 2px 2px var(--dark-shadow-color);
+}
+
+.inputs,.inputs2{
+  display: flex;
+  align-items: center;
+}
+.inputs label, .inputs2>label{
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-red-color);
+  border-radius: 5px 0 0 5px;
+}
+
+.inputs2>label{
+  border-radius: 5px;
+}
+.inputs label i, .inputs2>label{
+  font-size: 20px;
+  color: var(--red-color);
+}
+
+#manual-entry{
+  cursor: pointer;
+  color: var(--dark-shadow-color);
+  transition: all 0.5s;
+  padding-left: 5px;
+  margin: 5px 0;
+}
+
+#manual-entry:hover{
+  color: var(--red-color);
+}
+
+.btn{
+  width: 100px;
+  border: 2px solid var(--light-red-color);
+}
+
+.submit-btns{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 5px;
+}
+
+.loading-circle{
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-span{
+  display: block;
+  height: 20px;
+  width: 20px;
+  border: 2px solid var(--green-color);
+  border-left: 2px solid var(--white-color);
+  border-radius: 50%;
+  animation: rotate 1s linear  infinite;
+}
+
+@keyframes rotate {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+  
+}
+.success{
+  color: var(--sucess);
+  text-align: center;
+}
+
+.or {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  width: 150px;
+  background-color: var(--black-color);
+  margin: 0 10px;
+}
+
+.or-text {
+  padding: 0 10px;
+  font-weight: bold;
+}
+
+.submit{
+  margin: 10px 0;
+}
+
+
+/* login */
+.forgot{
+  margin: 5px 0;
+  width: 70%;
+  text-align: end;
+}
+
+.forgot a{
+  text-decoration: none;
+  color: var(--red-color);
+  transition: all 0.5s;
+}
+
+.forgot a:hover{
+  color: var(--sucess);
+}
+
+/* loading */
 
 .loading{
   height: 86vh;
@@ -438,4 +689,41 @@ background-color: var(--body-color);
   100% {
     bottom: -1px;
   }
+}
+
+.icon {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon::before, .icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: all 0.25s ease;
+  border-radius: 30px;
+}
+.icon i {
+  position: relative;
+  font-size: 20px;
+  margin-top: 15px;
+  transition: all 0.25s ease;
+}
+
+.icon-fill::before {
+  transition-duration: 0.5s;
+  box-shadow: inset 0 0 0 1px var(--light-red-color);
+}
+.icon-fill:hover::before {
+  box-shadow: inset 0 0 0 60px var(--light-red-color);
 }
