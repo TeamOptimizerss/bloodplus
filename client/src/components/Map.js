@@ -30,6 +30,8 @@ const Map = () => {
     return new mapboxgl.Popup({ offset: 25 }).setHTML(`
       <h3>${userData.username}</h3>
       <p>Email: ${userData.mailid}<br>Blood Group: ${userData.bloodgroup}</p>
+      <p>Contact: ${userData.contact}</p>
+      <p>Location: ${userData.longitude}, ${userData.latitude}</p>
     `);
   };
 
@@ -240,8 +242,11 @@ const Map = () => {
       <div className="floating-icon" onClick={getLocation}>
         <i className="fa-solid fa-location-crosshairs"></i>
       </div>
-      <div>
+      <div className="floating-filter">
         <label>Filter by Blood Group:</label>
+        <div className="drop">
+          <i className="fa-solid fa-droplet red"></i>
+        </div>
         <select
           onChange={(e) =>
             setFilterCriteria(e.target.value === "All" ? null : e.target.value)
@@ -258,8 +263,11 @@ const Map = () => {
           <option value="O+">O+</option>
           <option value="O-">O-</option>
         </select>
-
-        <button onClick={filterMarkers}>Filter</button>
+        <button className="btn" onClick={filterMarkers}>
+          <span>
+            <i className="fa-solid fa-filter red"></i> Filter
+          </span>
+        </button>
       </div>
     </div>
   );

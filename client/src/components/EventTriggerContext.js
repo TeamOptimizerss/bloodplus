@@ -6,12 +6,15 @@ const EventTriggerContext = createContext();
 // Create a provider component
 export const EventTriggerProvider = ({ children }) => {
   const [themeTrigger, setThemeTrigger] = useState(false);
+  const [coordinatesTrigger, setCoordinatesTrigger] = useState(null);
 
   return (
     <EventTriggerContext.Provider
       value={{
         themeTrigger,
         setThemeTrigger,
+        coordinatesTrigger,
+        setCoordinatesTrigger,
       }}
     >
       {children}

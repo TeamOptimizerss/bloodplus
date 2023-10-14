@@ -4,14 +4,14 @@ import {
   useConfirmAddress,
   config,
 } from "@mapbox/search-js-react";
-import { toast } from "react-toastify"; // Import toast from the toast library
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { useEventTrigger } from "./EventTriggerContext";
 
 export default function AutoSignupFill() {
   const [showFormExpanded, setShowFormExpanded] = useState(false);
   const [token, setToken] = useState("");
   const [location, setLocation] = useState("");
-  const [coordinates, setCoordinates] = useState(null);
+  const { coordinatesTrigger, setCoordinatesTrigger } = useEventTrigger();
 
   useEffect(() => {
     const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -40,7 +40,7 @@ export default function AutoSignupFill() {
 
       if (data.features && data.features.length > 0) {
         const coordinates = data.features[0].center;
-        setCoordinates(coordinates);
+        setCoordinatesTrigger(coordinates);
       } else {
         toast.error("Location not found."); // Show an error toast
         console.error("Location not found.");
@@ -169,13 +169,6 @@ export default function AutoSignupFill() {
           </div>
         ) : null}
       </form>
-
-      {/* Coordinates */}
-      {coordinates && (
-        <div className="mt24">
-          <p className="success">Your are now ready to became a Donor ❤️</p>
-        </div>
-      )}
     </div>
   );
 }

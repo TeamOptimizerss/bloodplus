@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AutoSignupfill from "./AutoSignupFill";
 import { toast } from "react-toastify";
 import { useUserContext } from "./UserContext";
+import { useEventTrigger } from "./EventTriggerContext";
 
 const SignUpForm = () => {
   const [userData, setUserData] = useState({
@@ -14,7 +15,7 @@ const SignUpForm = () => {
     contact: "",
   });
 
-  const [coordinates, setCoordinates] = useState(null);
+  const { coordinatesTrigger, setCoordinatesTrigger } = useEventTrigger();
   const [validationErrors, setValidationErrors] = useState({});
   const Navigate = useNavigate();
   const [isLoading, setIsloading] = useState(false);
@@ -36,7 +37,7 @@ const SignUpForm = () => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
       });
       const { latitude, longitude } = position.coords;
-      setCoordinates([longitude, latitude]);
+      setCoordinatesTrigger([longitude, latitude]);
       setIsloading(false);
     } catch (error) {
       console.error("Error getting user's location:", error);
@@ -86,12 +87,12 @@ const SignUpForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      if (!coordinates) {
+      if (!coordinatesTrigger) {
         toast.error("Address is required");
         return;
       }
-      userData["longitude"] = coordinates[0];
-      userData["latitude"] = coordinates[1];
+      userData["longitude"] = coordinatesTrigger[0];
+      userData["latitude"] = coordinatesTrigger[1];
       fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: {
@@ -296,7 +297,7 @@ const SignUpForm = () => {
           <span className="circle-span"></span>
         </div>
       )}
-      {coordinates && (
+      {coordinatesTrigger && (
         <p className="success">Your are now ready to became a Donor ❤️</p>
       )}
       <div className="or">
