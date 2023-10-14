@@ -429,13 +429,13 @@ a.mapboxgl-ctrl-logo, button.mapbox-gl-draw_trash,div.mapboxgl-ctrl-attrib-inner
   padding-left: 10px;
 }
 
-.checkbox label a{
+.checkbox label a,.or a{
   text-decoration: none;
   color: var(--red-color);
   transition: 0.5s all;
 }
 
-.checkbox label a:hover{
+.checkbox label a:hover, .or a:hover{
   color: var(--green-color);
 }
 
@@ -727,3 +727,44 @@ background-color: var(--body-color);
 .icon-fill:hover::before {
   box-shadow: inset 0 0 0 60px var(--light-red-color);
 }
+
+/* custom markers */
+.custom-marker{
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.custom-marker.A\+{
+  background-image: url("./images/a+marker.png");
+}
+
+.custom-marker.A\-{
+  background-image: url("./images/a-marker.png");
+}
+
+.custom-marker.B\+{
+  background-image: url("./images/b+marker.png");
+}
+
+.custom-marker.B\-{
+  background-image: url("./images/b-marker.png");
+}
+
+.custom-marker.O\+{
+  background-image: url("./images/o+marker.png");
+}
+
+.custom-marker.O\-{
+  background-image: url("./images/o-marker.png");
+}
+
+.custom-marker.AB\+{
+  background-image: url("./images/ab+marker.png");
+}
+
+.custom-marker.AB\-{
+  background-image: url("./images/ab-marker.png");
+}
+

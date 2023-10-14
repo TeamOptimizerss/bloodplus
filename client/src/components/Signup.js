@@ -1,9 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import AutoSignupfill from "./AutoSignupFill";
+import React, { Fragment } from "react";
+import { Outlet } from "react-router-dom";
 import HandDonate from "../images/handdonate.png";
-import { toast } from "react-toastify";
-import { useUserContext } from "./UserContext";
 
 const Signup = () => {
   return (

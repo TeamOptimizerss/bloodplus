@@ -16,6 +16,22 @@ const Map = () => {
   );
   const { themeTrigger } = useEventTrigger();
   const { coordinates } = useUserContext();
+  const [userLocations, setUserLocations] = useState([]);
+  const [filterCriteria, setFilterCriteria] = useState(null);
+
+  const createCustomMarkerElement = (userData) => {
+    // Create an HTML element for your custom marker
+    const customMarkerElement = document.createElement("div");
+    customMarkerElement.className = `custom-marker ${userData.bloodgroup}`;
+    return customMarkerElement;
+  };
+
+  const createCustomMarkerPopup = (userData) => {
+    return new mapboxgl.Popup({ offset: 25 }).setHTML(`
+      <h3>${userData.username}</h3>
+      <p>Email: ${userData.mailid}<br>Blood Group: ${userData.bloodgroup}</p>
+    `);
+  };
 
   const initializeMap = (latitude, longitude) => {
     if (mapContainer.current) {
@@ -87,6 +103,9 @@ const Map = () => {
           calculateCircleRadius(map.getZoom())
         );
       });
+
+      // After initializing the map, fetch user location data and create markers.
+      fetchUserLocations();
     });
     addOrUpdateMarker(latitude, longitude);
   };
@@ -118,6 +137,57 @@ const Map = () => {
         .setLngLat([longitude, latitude])
         .addTo(mapRef.current);
     }
+  };
+
+  const fetchUserLocations = () => {
+    // Replace this URL with your API endpoint.
+    const apiUrl = "http://localhost:5000/getlocations";
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserLocations(data);
+        // Create markers for each user's location.
+        data.forEach((userData) => {
+          createCustomMarker(userData);
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching user locations:", error);
+      });
+  };
+
+  const createCustomMarker = (userData) => {
+    const { latitude, longitude } = userData;
+    const customMarker = new mapboxgl.Marker({
+      element: createCustomMarkerElement(userData),
+    })
+      .setLngLat([longitude, latitude])
+      .setPopup(createCustomMarkerPopup(userData))
+      .addTo(mapRef.current);
+  };
+
+  const filterMarkers = () => {
+    if (!mapRef.current) {
+      return;
+    }
+
+    // Remove all existing markers
+    const markers = mapRef.current
+      .getCanvasContainer()
+      .querySelectorAll(".custom-marker");
+    markers.forEach((marker) => marker.remove());
+
+    const { latitude, longitude } = userLocation;
+    const filteredMarkers = userLocations.filter(
+      (userData) =>
+        filterCriteria === null || userData.bloodgroup === filterCriteria
+    );
+
+    // Create markers for the filtered data
+    filteredMarkers.forEach((userData) => {
+      createCustomMarker(userData);
+    });
   };
 
   useEffect(() => {
@@ -169,6 +239,27 @@ const Map = () => {
       <div ref={mapContainer} style={{ width: "100%", height: "85vh" }}></div>
       <div className="floating-icon" onClick={getLocation}>
         <i className="fa-solid fa-location-crosshairs"></i>
+      </div>
+      <div>
+        <label>Filter by Blood Group:</label>
+        <select
+          onChange={(e) =>
+            setFilterCriteria(e.target.value === "All" ? null : e.target.value)
+          }
+          value={filterCriteria || "All"}
+        >
+          <option value="All">All</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+
+        <button onClick={filterMarkers}>Filter</button>
       </div>
     </div>
   );

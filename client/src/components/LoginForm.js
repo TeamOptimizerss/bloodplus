@@ -135,7 +135,7 @@ const LoginForm = () => {
           </span>
         </button>
       </form>
-      <div className="or checkbox">
+      <div className="or">
         <p>
           Want to became a Donor..?{" "}
           <label>
