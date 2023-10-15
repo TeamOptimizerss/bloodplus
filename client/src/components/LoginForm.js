@@ -24,30 +24,10 @@ const LoginForm = () => {
       toast.error("Invalid email address");
     }
 
-    // Username validation
-    if (userData.username.length < 5) {
-      errors.username = "Username must be at least 5 characters long";
-      toast.error("Username must be at least 5 characters long");
-    }
-
     // Password validation
     if (userData.password.length < 6) {
       errors.password = "Password must be at least 6 characters long";
       toast.error("Password must be at least 6 characters long");
-    }
-
-    // Required fields
-    if (!userData.bloodgroup) {
-      errors.bloodgroup = "Blood group is required";
-      toast.error("Blood group is required");
-    }
-    if (!userData.contact) {
-      errors.contact = "Contact is required";
-      toast.error("Contact is required");
-    }
-    if (!userData.terms) {
-      errors.terms = "You must agree to the terms and conditions";
-      toast.error("You must agree to the terms and conditions");
     }
 
     setValidationErrors(errors);
@@ -56,34 +36,35 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then(async (response) => {
-        if (response.status === 200) {
-          // Login was successful
-          const data = await response.json();
-          setUserEmail(data.userEmail);
-          setUserName(data.username);
-          Navigate("/");
-        } else if (response.status === 401) {
-          toast.error("User not found");
-        } else if (response.status === 402) {
-          toast.error("Invalid password");
-        } else {
-          toast.error("Failed to log in. Please try again.");
-        }
+    if (validateForm()) {
+      fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       })
-      .catch((error) => {
-        console.error(
-          "An error occurred while making the request. Please try again."
-        );
-      });
+        .then(async (response) => {
+          if (response.status === 200) {
+            // Login was successful
+            const data = await response.json();
+            setUserEmail(data.userEmail);
+            setUserName(data.username);
+            Navigate("/");
+          } else if (response.status === 401) {
+            toast.error("User not found");
+          } else if (response.status === 402) {
+            toast.error("Invalid password");
+          } else {
+            toast.error("Failed to log in. Please try again.");
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "An error occurred while making the request. Please try again."
+          );
+        });
+    }
   };
 
   return (

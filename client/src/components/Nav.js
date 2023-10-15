@@ -2,17 +2,28 @@ import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import BloodplusLogo from "../images/Bloodpluslogo.png";
 import { useEventTrigger } from "./EventTriggerContext";
+import { useUserContext } from "./UserContext";
+import UserProfilePopup from "./UserProfilePopup";
+import { useLocation } from "react-router-dom";
 
 const Nav = () => {
   const savedTheme = localStorage.getItem("theme");
   const [isDarkMode, setIsDarkMode] = useState(savedTheme === "dark");
   const { themeTrigger, setThemeTrigger } = useEventTrigger();
+  const { userEmail } = useUserContext();
+  const [showUserProfile, setShowUserProfile] = useState(false);
+  const location = useLocation();
+  const currentPathname = location.pathname;
 
   const toggleMode = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setIsDarkMode(!isDarkMode);
     setThemeTrigger(!isDarkMode);
     localStorage.setItem("theme", newTheme);
+  };
+
+  const toggleUserProfile = () => {
+    setShowUserProfile(!showUserProfile);
   };
 
   useEffect(() => {
@@ -45,19 +56,23 @@ const Nav = () => {
                 )}
               </span>
             </span>
+            {userEmail.length === 0 && (
+              <>
+                <li>
+                  <NavLink to="/donors/signup">
+                    <span>Be a Donor</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/donors/login">
+                    <span>Already a Donor</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
-              <NavLink
-                to="/donors/signup"
-                className="btn-flip"
-                data-back="Back"
-                data-front="Front"
-              >
-                <span>Be a Donor</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/donors/login">
-                <span>Already a Donor</span>
+              <NavLink to="/community">
+                <span>Community</span>
               </NavLink>
             </li>
             <li>
@@ -70,9 +85,15 @@ const Nav = () => {
                 <span>Contact Us</span>
               </NavLink>
             </li>
+            {userEmail.length > 0 && (
+              <li onClick={toggleUserProfile} className="userprofile">
+                <div>{userEmail.charAt(0)}</div>
+              </li>
+            )}
           </ul>
         </div>
       </div>
+      {showUserProfile && <UserProfilePopup />}
     </Fragment>
   );
 };

@@ -12,7 +12,6 @@ const Home = () => {
       setIsLoading(false);
     }
   }, [coordinates]);
-
   return <Fragment>{isLoading ? <Loading></Loading> : <Map></Map>}</Fragment>;
 };
 

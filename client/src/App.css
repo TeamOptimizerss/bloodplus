@@ -20,7 +20,7 @@
 
 [theme="dark"]{
   --red-color: hsl(0, 1%, 34%);
-  --light-red-color: #EF9696;
+  --light-red-color: #a7a6a6;
   --green-color: #00EC50;
   --light-green-color : #abfbc4;
   --white-color: #000000;
@@ -28,6 +28,7 @@
   --light-shadow-color: rgba(0, 0, 0, 0.3);
   --dark-shadow-color: rgba(0, 0, 0, 0.6);
   --body-color: #343434;
+  --sucess: green;
 }
 /* color - pallete */
 
@@ -155,6 +156,25 @@ body{
   width: 200px;
   font-size: 18px;
 }
+
+.userprofile{
+  background-color: var(--light-red-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  border: 3px solid var(--body-color);
+  color: var(--black-color);
+  cursor: pointer;
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+}
+
+.userprofile div{
+  font-size: 22px;
+}
+
 /* nav bar */
 
 /* side nav */
@@ -437,7 +457,7 @@ a.mapboxgl-ctrl-logo, button.mapbox-gl-draw_trash,div.mapboxgl-ctrl-attrib-inner
 .floating-icon{
   position: absolute;
   z-index: 2;
-  right: 3%;
+  right: 1%;
   bottom: 10%;
   height: 40px;
   width: 40px;
@@ -455,7 +475,7 @@ a.mapboxgl-ctrl-logo, button.mapbox-gl-draw_trash,div.mapboxgl-ctrl-attrib-inner
 .floating-filter{
   position: absolute;
   z-index: 2s;
-  right: 2.5%;
+  right: 0.5%;
   bottom: 4%;
   display: flex;
   align-items: center;
@@ -962,3 +982,45 @@ background-color: var(--body-color);
   box-shadow: 2px 2px 2px var(--light-shadow-color);
 }
 
+/* userprofile popup */
+.userprofile-popup{
+  position: absolute;
+  max-height: 400px;
+  width: 300px;
+  background-color: var(--body-color);
+  z-index: 1000;
+  right: 3%;
+  top: 10%;
+  border-radius: 5px;
+  border: 3px solid var(--light-red-color);
+  padding: 20px 30px;
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.userprofile-popup > div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.userprofile-popup i{
+  color: var(--red-color);
+  padding-right: 5px;
+}
+.userprofile-popup div div:nth-child(2) i{
+  cursor: pointer;
+  transition: 0.5s all;
+}
+
+.userprofile-popup div div:nth-child(2) i:hover{
+  color: var(--light-red-color);
+}
+.userprofile-popup .button{
+  display: flex;
+  align-self: center;
+}
