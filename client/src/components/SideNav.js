@@ -1,78 +1,58 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import AutofillCheckoutDemo from "./AutofillCheckout";
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const currentPathname = location.pathname;
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (currentPathname !== "/") {
+      setIsOpen(false);
+    }
+  }, [currentPathname]);
 
   return (
     <Fragment>
       <div className={`side-nav ${isOpen ? "open" : ""}`}>
         <ul>
           <li>
-            <Link onClick={toggleSidebar}>
-              {isOpen ? (
-                <div className="icon icon-fill">
-                  <i className="fa-solid fa-door-open"></i>
-                </div>
-              ) : (
-                <div className="icon icon-fill">
-                  <i className="fa-solid fa-door-closed"></i>
-                </div>
-              )}
-            </Link>
+            <NavLink to="/" onClick={toggleSidebar}>
+              <div className="icon icon-fill">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <div className="icon icon-fill">
-              <i className="fa-solid fa-heart"></i>
-            </div>
+            <NavLink to="/feedbacks">
+              <div className="icon icon-fill">
+                <i className="fa-solid fa-heart"></i>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <div className="icon icon-fill">
-              <i className="fa-solid fa-share"></i>
-            </div>
+            <NavLink to="/share">
+              <div className="icon icon-fill">
+                <i className="fa-solid fa-share"></i>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <div className="icon icon-fill">
-              <i className="fa-solid fa-bullhorn"></i>
-            </div>
+            <NavLink to="/campaigns">
+              <div className="icon icon-fill">
+                <i className="fa-solid fa-bullhorn"></i>
+              </div>
+            </NavLink>
           </li>
         </ul>
-        {isOpen && (
-          <div className="side-nav-div">
-            <AutofillCheckoutDemo></AutofillCheckoutDemo>
-            <div className="hide-icons-section">
-              <h3>
-                Hide Icons <i className="fa-regular fa-eye-slash"></i>
-              </h3>
-              <input type="radio" name="bloodhosp" id="blood" />
-              <label htmlFor="blood" id="bloodlabel">
-                <i className="fa-solid fa-droplet"></i> Blood
-              </label>
-              <br />
-              <input type="radio" name="bloodhosp" id="hospital" />
-              <label htmlFor="hospital" id="hospitallabel">
-                <i className="fa-solid fa-hospital"></i> Hospital
-              </label>
-              <br />
-            </div>
-            <div className="feedback-section">
-              <div className="feedback-text">
-                Your feedback is valuable to us. It helps us understand your
-                needs and preferences better. Whether you have suggestions for
-                improvements, encountered issues, or just want to share your
-                thoughts, please feel free to let us know. We appreciate your
-                input in making our platform even better for you and others.
-              </div>
-              <button className="btn green feedback">
-                <span>FeedBack</span>
-              </button>
-            </div>
-          </div>
-        )}
+        <div className="side-nav-div">
+          <AutofillCheckoutDemo></AutofillCheckoutDemo>
+        </div>
       </div>
     </Fragment>
   );

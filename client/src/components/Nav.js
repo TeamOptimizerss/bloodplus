@@ -4,7 +4,6 @@ import BloodplusLogo from "../images/Bloodpluslogo.png";
 import { useEventTrigger } from "./EventTriggerContext";
 import { useUserContext } from "./UserContext";
 import UserProfilePopup from "./UserProfilePopup";
-import { useLocation } from "react-router-dom";
 
 const Nav = () => {
   const savedTheme = localStorage.getItem("theme");
@@ -12,8 +11,6 @@ const Nav = () => {
   const { themeTrigger, setThemeTrigger } = useEventTrigger();
   const { userEmail } = useUserContext();
   const [showUserProfile, setShowUserProfile] = useState(false);
-  const location = useLocation();
-  const currentPathname = location.pathname;
 
   const toggleMode = () => {
     const newTheme = isDarkMode ? "light" : "dark";
