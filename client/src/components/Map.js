@@ -3,6 +3,8 @@ import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import { useEventTrigger } from "./EventTriggerContext";
 import { useUserContext } from "./UserContext";
+import MarkerPopup from "./MarkerPopup";
+import { createRoot } from "react-dom/client";
 
 const Map = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -20,19 +22,23 @@ const Map = () => {
   const [filterCriteria, setFilterCriteria] = useState(null);
 
   const createCustomMarkerElement = (userData) => {
-    // Create an HTML element for your custom marker
     const customMarkerElement = document.createElement("div");
     customMarkerElement.className = `custom-marker ${userData.bloodgroup}`;
     return customMarkerElement;
   };
 
   const createCustomMarkerPopup = (userData) => {
-    return new mapboxgl.Popup({ offset: 25 }).setHTML(`
-      <h3>${userData.username}</h3>
-      <p>Email: ${userData.mailid}<br>Blood Group: ${userData.bloodgroup}</p>
-      <p>Contact: ${userData.contact}</p>
-      <p>Location: ${userData.longitude}, ${userData.latitude}</p>
-    `);
+    const container = document.createElement("div");
+    const root = createRoot(container);
+
+    root.render(<MarkerPopup userData={userData} />);
+
+    // Create a Mapbox GL popup and set its maximum width to 300px
+    const popup = new mapboxgl.Popup({ offset: 25 });
+    popup.setDOMContent(container);
+    popup.setMaxWidth("300px");
+
+    return popup;
   };
 
   const initializeMap = (latitude, longitude) => {
