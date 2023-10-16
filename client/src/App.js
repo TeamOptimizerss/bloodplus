@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
+import Campaigns from "./components/Campaigns";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="login" element={<LoginForm />} />
               </Route>
               <Route exact path="/aboutus" element={<AboutUs />} />
+              <Route exact path="/campaigns" element={<Campaigns />} />
             </Routes>
             <Footer></Footer>
             <ToastContainer />

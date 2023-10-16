@@ -125,6 +125,7 @@ const SignUpForm = () => {
         });
     }
   };
+  console.log(coordinatesTrigger);
   return (
     <div className="signup-form">
       <h1>

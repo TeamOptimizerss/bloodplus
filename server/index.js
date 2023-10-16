@@ -12,9 +12,11 @@ const db = require("./configs/mongoose");
 
 const userRoutes = require("./routes/userRoutes");
 const mapRoutes = require("./routes/mapRoutes");
+const campaignRoutes = require("./routes/campaignRoutes");
 
 app.use("/", userRoutes);
 app.use("/", mapRoutes);
+app.use("/", campaignRoutes);
 
 const PORT = process.env.PORT;
 server.listen(PORT, () => {

@@ -301,6 +301,11 @@ a.mapboxgl-ctrl-logo, button.mapbox-gl-draw_trash,div.mapboxgl-ctrl-attrib-inner
   background:linear-gradient(90deg,var(--white-color),var(--red-color));
   padding: 10px 100px;
   color: var(--black-color);
+  position: relative;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .footer a{
   text-decoration: none;
@@ -973,4 +978,152 @@ background-color: var(--body-color);
 .userprofile-popup .button{
   display: flex;
   align-self: center;
+}
+
+/* campaings */
+.default-margin{
+  margin-left: 60px;
+}
+
+.campaign{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.all-campaigns{
+  padding: 10px 0 10px 50px;
+  width: 70%;
+}
+
+.campaign h2{
+  color: var(--red-color);
+  margin: 10px 0;
+}
+.campaign .template{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--white-color);
+  border-radius: 5px;
+  color: var(--black-color);
+  padding: 10px 20px;
+  border: 3px solid var(--red-color);
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+  transition: 0.5s all;
+  font-size: 15px;
+  width: 400px;
+  height: 250px;
+  position: relative;
+}
+
+.campaign .template h2{
+  color: var(--black-color);
+  font-size: 20px;
+}
+
+.campaign .template:hover{
+  box-shadow: 2px 2px 2px var(--dark-shadow-color);
+}
+
+
+.campaign .image img{
+  height: 500px;
+  /* position: fixed;
+  right: 0; 
+  bottom: 0;  */
+}
+
+.conduct-button .btn{
+  width: auto;
+  top: 20px;
+  right: 20px;
+}
+
+/* modal */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-shadow-color);
+  z-index: 888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content{
+  background: var(--white-color);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--light-shadow-color);
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: var(--black-color);
+  font-size: 24px;
+}
+
+.modal.show {
+  display: block;
+}
+
+#confirm{
+  position: absolute;
+  z-index: 1000;
+  right: 8%;
+  bottom: 15%;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-around;
+  margin:5px 0;
+}
+
+.upcoming>div, .past>div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.btn-c{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.btn-c span{
+  height: 40px;
+  width: 40px;
+  display: block;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-c::after{
+  border-radius: 50%;
+}
+
+.buttons-c{
+  display: flex;
+  margin: 5px 0;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }

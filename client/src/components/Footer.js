@@ -7,7 +7,7 @@ import GetitonGooglePlay from "../images/get-it-on-google-play.png";
 const Footer = () => {
   return (
     <Fragment>
-      <div className="footer in-container">
+      <div className="footer">
         <div className="footer-image">
           <Link to="/">
             <div className="image">

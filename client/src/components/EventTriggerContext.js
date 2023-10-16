@@ -7,6 +7,8 @@ const EventTriggerContext = createContext();
 export const EventTriggerProvider = ({ children }) => {
   const [themeTrigger, setThemeTrigger] = useState(false);
   const [coordinatesTrigger, setCoordinatesTrigger] = useState(null);
+  const [campAddress, setCampAddress] = useState(null);
+  const [campCordinates, setCampCordinates] = useState(null);
 
   return (
     <EventTriggerContext.Provider
@@ -15,6 +17,10 @@ export const EventTriggerProvider = ({ children }) => {
         setThemeTrigger,
         coordinatesTrigger,
         setCoordinatesTrigger,
+        campAddress,
+        setCampAddress,
+        campCordinates,
+        setCampCordinates,
       }}
     >
       {children}
