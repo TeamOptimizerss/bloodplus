@@ -1133,14 +1133,16 @@ background-color: var(--body-color);
 
 .share{
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
 }
 
 .qr-container{
-  height: 80vh;
-  width: 50%;
+  height: 70vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items:center;
   justify-content: center;
 }
 
@@ -1148,8 +1150,9 @@ background-color: var(--body-color);
   height: 500px;
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
   filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
+  transform: rotateY(180deg);
 }
 
 .qr-image img{

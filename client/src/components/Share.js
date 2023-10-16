@@ -25,6 +25,9 @@ const Share = () => {
   return (
     <Fragment>
       <div className="default-margin share">
+        <div className="share-bg">
+          <img src={ShareBg} alt="Share Background" />
+        </div>
         <div className="qr-container">
           <h2 className="red">Scan QR Code to open the site in mobile</h2>
           <div className="qr-image">
@@ -43,9 +46,6 @@ const Share = () => {
               ></i>
             </span>
           </h3>
-        </div>
-        <div className="share-bg">
-          <img src={ShareBg} alt="Share Background" />
         </div>
       </div>
     </Fragment>
