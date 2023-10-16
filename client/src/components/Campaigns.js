@@ -123,11 +123,53 @@ const Campaigns = () => {
 
   const handleScroll = () => {
     const parentContainer = document.querySelector(".campaign");
-    console.log(window.scrollY, parentContainer.offsetHeight - 644);
     if (window.scrollY > parentContainer.offsetHeight - 644) {
       setImagePosition("absolute");
     } else {
       setImagePosition("fixed");
+    }
+  };
+
+  const handleWhatsAppShare = async (campaign) => {
+    const message = `
+*🩸🏕️Bloodplus Community Campaign Details🏕️🩸*
+Campaign Name: ${campaign.campname}
+Date & Time: ${formatDateAndTime(campaign.dateandtime)}
+Venue: ${campaign.venue}
+Address: ${campaign.address}
+Purpose: ${campaign.purpose}
+Conducted By: ${campaign.conductedby}
+Location: https://www.google.com/maps/search/?api=1&query=${
+      campaign.latitude
+    },${campaign.longitude}
+Form Link: ${campaign.formlink}
+*Shared from Bloodplus🩸 Community*
+`;
+
+    try {
+      if (navigator.share) {
+        await navigator
+          .share({
+            title: "Bloodplus Campaign Details",
+            text: message,
+          })
+          .then(() => console.log("Successful share"))
+          .catch((error) => console.log("Error in sharing", error));
+      } else {
+        console.log(`System does not support sharing text messages.`);
+
+        const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+          message
+        )}`;
+        window.open(whatsappURL, "_blank");
+      }
+    } catch (error) {
+      console.error("Error creating and sharing text file:", error);
+
+      const whatsappURL = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappURL, "_blank");
     }
   };
 
@@ -187,7 +229,12 @@ const Campaigns = () => {
                         </a>
                       </p>
                       <div className="buttons-c">
-                        <button className="btn btn-c">
+                        <button
+                          className="btn btn-c"
+                          onClick={() => {
+                            handleWhatsAppShare(campaign);
+                          }}
+                        >
                           <span>
                             <i className="fa-solid fa-share"></i>
                           </span>

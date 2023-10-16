@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
 import Campaigns from "./components/Campaigns";
+import Share from "./components/Share";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="login" element={<LoginForm />} />
               </Route>
               <Route exact path="/aboutus" element={<AboutUs />} />
+              <Route exact path="/share" element={<Share />} />
               <Route exact path="/campaigns" element={<Campaigns />} />
             </Routes>
             <Footer></Footer>
