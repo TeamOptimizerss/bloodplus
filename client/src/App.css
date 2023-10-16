@@ -16,6 +16,8 @@
   --dark-shadow-color: rgba(0, 0, 0, 0.6);
   --body-color: #ffffff;
   --sucess: green;
+  --yellow-color: yellow;
+  --grey-color: rgb(181, 181, 181);
 }
 
 [theme="dark"]{
@@ -29,6 +31,8 @@
   --dark-shadow-color: rgba(0, 0, 0, 0.6);
   --body-color: #343434;
   --sucess: green;
+  --yellow-color: yellow;
+  --grey-color: rgb(181, 181, 181);
 }
 /* color - pallete */
 
@@ -1029,15 +1033,13 @@ background-color: var(--body-color);
 
 .campaign .image img{
   height: 500px;
-  /* position: fixed;
-  right: 0; 
-  bottom: 0;  */
+  z-index: 990;
 }
 
 .conduct-button .btn{
   width: auto;
-  top: 20px;
-  right: 20px;
+  top: 65px;
+  right: 100px;
 }
 
 /* modal */
@@ -1162,4 +1164,92 @@ background-color: var(--body-color);
 .share-icon{
   color: var(--red-color);
   margin: 5px 0;
+}
+
+/* feedbacks */
+.feedback{
+  position: relative;
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-bottom: 10px;
+}
+
+.fb-bg img{
+  height: 500px;
+  filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
+}
+
+.filled{
+  color: var(--yellow-color);
+  text-shadow: 1px 1px 1px var(--light-shadow-color);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.not-filled{
+  color: var(--grey-color);
+  text-shadow: 1px 1px 1px var(--light-shadow-color);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.feedback-modal textarea{
+  min-width: 300px;
+  max-width: 300px;
+  max-height: 100px;
+  min-height: 100px;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+}
+
+.fb-div{
+  text-align: center;
+  color: var(--red-color);
+}
+
+.fb-container .btn{
+  width: 200px; 
+}
+
+.fb-container .btn.big{
+  width: 250px;
+}
+
+.fb-container{
+  display: flex;
+}
+
+.all-feedback ul{
+  list-style: none;
+}
+
+.all-feedback ul li{
+  margin: 10px 0;
+  width: 70%;
+  border: 2px solid var(--red-color);
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--black-color);
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+  transition: 0.5s all;
+}
+
+.all-feedback ul li:hover{
+  box-shadow: 2px 2px 2px var(--dark-shadow-color);
+}
+
+.btn.right{
+  right: 200px;
+  top: 7%;
+}
+
+.btn a{
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+.date{
+  color: var(--grey-color);
+  font-size: 10px;
 }

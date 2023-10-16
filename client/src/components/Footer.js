@@ -29,22 +29,22 @@ const Footer = () => {
         </div>
         <div className="footer-routes">
           <ul>
-            <Link>
+            <Link to="/campaigns">
               <li>Campaigns</li>
             </Link>
           </ul>
           <ul>
-            <Link>
+            <Link to="/aboutus">
               <li>Abouts Us</li>
             </Link>
           </ul>
           <ul>
-            <Link>
+            <Link to="/contactus">
               <li>Contact Us</li>
             </Link>
           </ul>
           <ul>
-            <Link>
+            <Link to="/feedbacks">
               <li>Feedbacks</li>
             </Link>
           </ul>
@@ -56,7 +56,7 @@ const Footer = () => {
             </Link>
           </ul>
           <ul>
-            <Link>
+            <Link to="/share">
               <li>Share & Spread</li>
             </Link>
           </ul>

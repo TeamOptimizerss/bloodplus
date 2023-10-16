@@ -16,6 +16,7 @@ import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
 import Campaigns from "./components/Campaigns";
 import Share from "./components/Share";
+import FeedBacks from "./components/FeedBacks";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               </Route>
               <Route exact path="/aboutus" element={<AboutUs />} />
               <Route exact path="/share" element={<Share />} />
+              <Route exact path="/feedbacks" element={<FeedBacks />} />
               <Route exact path="/campaigns" element={<Campaigns />} />
             </Routes>
             <Footer></Footer>
