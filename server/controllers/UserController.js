@@ -60,3 +60,54 @@ exports.logIn = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.getDonorCounts = async (req, res) => {
+  try {
+    // Define an array of possible blood types
+    const possibleBloodTypes = [
+      "A+",
+      "A-",
+      "B+",
+      "B-",
+      "O+",
+      "O-",
+      "AB+",
+      "AB-",
+    ];
+
+    // Create an initial count map with counts initialized to 0
+    const bloodTypeCountsMap = {};
+    possibleBloodTypes.forEach((type) => {
+      bloodTypeCountsMap[type] = 0;
+    });
+
+    // Count the actual occurrences of each blood type
+    const bloodTypeCounts = await User.aggregate([
+      {
+        $group: {
+          _id: "$bloodgroup",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    // Populate the count map with actual counts
+    bloodTypeCounts.forEach((typeCount) => {
+      bloodTypeCountsMap[typeCount._id] = typeCount.count;
+    });
+
+    // Get the count of all donors
+    const allDonorsCount = Object.values(bloodTypeCountsMap).reduce(
+      (acc, count) => acc + count,
+      0
+    );
+
+    res.status(200).json({
+      allDonorsCount,
+      bloodTypeCounts: bloodTypeCountsMap,
+    });
+  } catch (error) {
+    console.error("Error fetching donor counts:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

@@ -1253,3 +1253,22 @@ background-color: var(--body-color);
   color: var(--grey-color);
   font-size: 10px;
 }
+
+
+.community-bg img{
+  height: 450px;
+  filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
+  padding-left: 50px;
+}
+
+.community{
+  display: flex;
+  margin: 10px 100px;
+  align-items: center;
+  color: var(--black-color);
+}
+
+
+.community h2{
+  color: var(--red-color);
+}
