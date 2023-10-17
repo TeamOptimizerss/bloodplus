@@ -18,6 +18,8 @@ import Campaigns from "./components/Campaigns";
 import Share from "./components/Share";
 import FeedBacks from "./components/FeedBacks";
 import Community from "./components/Community";
+import BloodGuide from "./components/BloodGuide";
+import TermsandConditions from "./components/TermsandConditions";
 
 function App() {
   return (
@@ -38,6 +40,12 @@ function App() {
               <Route exact path="/feedbacks" element={<FeedBacks />} />
               <Route exact path="/community" element={<Community />} />
               <Route exact path="/campaigns" element={<Campaigns />} />
+              <Route exact path="/guide" element={<BloodGuide />} />
+              <Route
+                exact
+                path="/termsandconditions"
+                element={<TermsandConditions />}
+              />
             </Routes>
             <Footer></Footer>
             <ToastContainer />

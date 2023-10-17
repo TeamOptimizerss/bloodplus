@@ -19,6 +19,10 @@ const Nav = () => {
     localStorage.setItem("theme", newTheme);
   };
 
+  const closeProfilePopup = () => {
+    setShowUserProfile(false);
+  };
+
   const toggleUserProfile = () => {
     setShowUserProfile(!showUserProfile);
   };
@@ -90,7 +94,7 @@ const Nav = () => {
           </ul>
         </div>
       </div>
-      {showUserProfile && <UserProfilePopup />}
+      {showUserProfile && <UserProfilePopup onPClose={closeProfilePopup} />}
     </Fragment>
   );
 };

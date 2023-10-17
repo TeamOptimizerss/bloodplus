@@ -36,16 +36,23 @@ const SideNav = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/share">
+            <NavLink to="/campaigns">
               <div className="icon icon-fill">
-                <i className="fa-solid fa-share"></i>
+                <i className="fa-solid fa-bullhorn"></i>
               </div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/campaigns">
+            <NavLink to="/guide">
               <div className="icon icon-fill">
-                <i className="fa-solid fa-bullhorn"></i>
+                <i className="fa-solid fa-user-nurse"></i>
+              </div>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/share">
+              <div className="icon icon-fill">
+                <i className="fa-solid fa-share"></i>
               </div>
             </NavLink>
           </li>

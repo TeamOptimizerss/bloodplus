@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
         <div className="footer-social">
           <ul>
-            <Link>
+            <Link to="/termsandconditions">
               <li>Terms & Conditions</li>
             </Link>
           </ul>
@@ -61,7 +61,7 @@ const Footer = () => {
             </Link>
           </ul>
           <ul>
-            <Link>
+            <Link to="/guide">
               <li>Blood Compatibility Guide</li>
             </Link>
           </ul>

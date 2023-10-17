@@ -274,7 +274,7 @@ const SignUpForm = () => {
             }
           />
           <label htmlFor="checkbox">
-            Agree to <Link to="/">terms and conditions</Link>
+            Agree to <Link to="/termsandconditions">terms and conditions</Link>
           </label>
         </div>
         <div

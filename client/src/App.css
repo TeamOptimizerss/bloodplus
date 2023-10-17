@@ -943,7 +943,7 @@ background-color: var(--body-color);
 
 /* userprofile popup */
 .userprofile-popup{
-  position: absolute;
+  position: fixed;
   max-height: 400px;
   width: 300px;
   background-color: var(--body-color);
@@ -992,6 +992,7 @@ background-color: var(--body-color);
 .campaign{
   position: relative;
   display: flex;
+  min-height: 80vh;
   justify-content: space-between;
 }
 
@@ -1168,6 +1169,7 @@ background-color: var(--body-color);
 
 /* feedbacks */
 .feedback{
+  min-height: 80vh;
   position: relative;
   padding-top: 10px;
   padding-left: 50px;
@@ -1271,4 +1273,118 @@ background-color: var(--body-color);
 
 .community h2{
   color: var(--red-color);
+}
+
+/* blood guide */
+
+
+.blood-guide.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.blood-guide table {
+  border-collapse: collapse;
+  border: 2px solid var(--black-color);
+  position: relative;
+  width: 40%;
+  height: 40%; 
+  margin: 20px 0;
+  font-size: 14px;
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+}
+
+.blood-guide .top{
+  position: absolute;
+  left: 44%;
+  top: -5%;
+}
+
+.blood-guide .left{
+  position: absolute;
+  top: 44%;
+  left: -12%;
+  transform: rotate(270deg);
+}
+
+.blood-guide th,.blood-guide td {
+  border: 1px solid var(--black-color);
+  padding: 5px; 
+  text-align: center;
+  font-size: 12px;
+}
+
+.blood-guide div {
+  background-color: var(--white-color);
+  padding: 20px;
+}
+
+.blood-guide.centered td {
+  border: 1px solid var(--black-color);
+  padding: 15px;
+  text-align: center;
+}
+
+.blood-guide .red-icon {
+  color: var(--red-color);
+}
+
+.blood-guide .large-icon {
+  font-size: 30px;
+}
+.blood-guide tbody tr:nth-child(1), .blood-guide tbody tr td:nth-child(1){
+  background-color: var(--red-color);
+  transition: 0.5s all;
+}
+
+.blood-guide tbody tr:nth-child(1) td:hover,.blood-guide tbody tr td:nth-child(1):hover{
+  background-color: var(--light-red-color);
+}
+
+.blood-guide tbody tr:nth-child(1) td,  .blood-guide tbody tr td:nth-child(1){
+  font-size: 18px;
+  color: var(--white-color);
+  transition: 0.5s all;
+}
+.blood-guide  tbody tr:nth-child(2n) {
+  background-color: var(--grey-color);
+}
+
+.guide-img img{
+  height: 500px;
+filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
+}
+
+.guide{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* profile modal */
+.profile-modal{
+  width: 440px;
+  text-align: center;
+  padding: 10px 40px;
+}
+
+/* terms & conditions */
+.terms-container img{
+  height: 400px;
+  float: right;
+  filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
+}
+
+.terms{
+  margin: 20px 50px 20px 100px;
+  color: var(--black-color);
+}
+
+.terms h2, .terms h3{
+  color: var(--red-color);
+  margin: 10px 0;
 }

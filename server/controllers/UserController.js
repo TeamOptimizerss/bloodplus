@@ -111,3 +111,82 @@ exports.getDonorCounts = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.updateUsername = async (req, res) => {
+  try {
+    const { mailid, newUsername, password } = req.body;
+    const user = await User.findOne({ mailid });
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (password !== user.password) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+    user.username = newUsername;
+    await user.save();
+    res.status(200).json({ message: "Username updated successfully" });
+  } catch (error) {
+    console.error("Error updating username:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.updateContact = async (req, res) => {
+  try {
+    const { mailid, newcontact, password } = req.body;
+    const user = await User.findOne({ mailid });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (password !== user.password) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+    user.contact = newcontact;
+    await user.save();
+    res.status(200).json({ message: "Contact updated successfully" });
+  } catch (error) {
+    console.error("Error updating contact:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.updatePassword = async (req, res) => {
+  try {
+    const { mailid, newpassword, oldpassword } = req.body;
+    const user = await User.findOne({ mailid });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (oldpassword !== user.password) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+    user.password = newpassword;
+    await user.save();
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.updateAddress = async (req, res) => {
+  try {
+    const { mailid, address, longitude, latitude, password } = req.body;
+    const user = await User.findOne({ mailid });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (password !== user.password) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+    user.address = address;
+    user.longitude = longitude;
+    user.latitude = latitude;
+    await user.save();
+    res.status(200).json({ message: "Address updated successfully" });
+  } catch (error) {
+    console.error("Error updating address:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
