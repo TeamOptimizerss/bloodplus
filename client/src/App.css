@@ -1195,7 +1195,7 @@ background-color: var(--body-color);
   cursor: pointer;
 }
 
-.feedback-modal textarea{
+.feedback-modal textarea, textarea{
   min-width: 300px;
   max-width: 300px;
   max-height: 100px;
@@ -1387,4 +1387,169 @@ filter: drop-shadow(5px 5px 5px var(--light-shadow-color));
 .terms h2, .terms h3{
   color: var(--red-color);
   margin: 10px 0;
+}
+
+/* About us */
+
+.aboutus{
+  margin: 10px 50px 10px 100px;
+}
+
+.aboutus .banner{
+  background-image: url("./images/aboutsusbanner.jpg");
+  height: 400px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
+}
+
+.hor-line{
+  border-bottom: 3px solid var(--grey-color);
+  width: 100%;
+}
+
+.matter-section{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.accordion{
+  width: 80%;
+  margin-left: 10%;
+}
+
+.accordion-item{
+  background-color: var(--light-red-color);
+  padding: 5px 20px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+}
+
+.accordion-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-content{
+  max-height: 0;
+  overflow: hidden;
+  font-weight: normal;
+  transition: all 0.3s ease-in-out;
+}
+
+.accordion-content.active {
+  max-height: 100px;
+}
+
+.profile-img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img img{
+  height: 70px;
+  border: 3px solid var(--red-color);
+  border-radius: 50%;
+}
+
+.profile{
+  width: 350px;
+  text-align: justify;
+  position: relative;
+  padding: 30px 20px;
+  border-radius: 5px;
+  border: 2px solid var(--red-color);
+  box-shadow: 2px 2px 2px var(--light-shadow-color);
+}
+
+.profile .name{
+  text-align: center;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.profile .role{
+  text-align: center;
+  margin: 5px 0;
+  font-weight: 600;
+}
+
+.profile .icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile .icons i{
+  border: 2px solid var(--red-color);
+  border-radius: 50%;
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
+  color: var(--red-color);
+}
+
+.profile .icons i:hover{
+  color: var(--light-red-color);
+}
+
+.our-profiles{
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.red-line{
+  background-color: var(--red-color);
+  height: 67px;
+  top: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+/* contact us */
+.contactus .banner{
+  background-image: url("./images/Contactu.webp");
+}
+
+.matter-form{
+  display: flex;
+  margin: 30px 0;
+}
+
+.matter div{
+  margin: 10px 0;
+}
+.matter-form .matter{
+  width: 50%;
+  text-align: justify;
+}
+
+.matter-form .form{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: center;
+}
+
+.matter-form .form textarea, .textarea{
+  border: 2px solid var(--light-red-color);
+  max-width: 360px;
+  min-width: 360px;
+  border-radius: 5px;
 }

@@ -19,12 +19,13 @@ import Share from "./components/Share";
 import FeedBacks from "./components/FeedBacks";
 import Community from "./components/Community";
 import BloodGuide from "./components/BloodGuide";
+import ContactUs from "./components/ContactUs";
 import TermsandConditions from "./components/TermsandConditions";
 
 function App() {
   return (
-    <UserProvider>
-      <EventTriggerProvider>
+    <EventTriggerProvider>
+      <UserProvider>
         <Fragment>
           <Router>
             <Nav></Nav>
@@ -36,6 +37,7 @@ function App() {
                 <Route path="login" element={<LoginForm />} />
               </Route>
               <Route exact path="/aboutus" element={<AboutUs />} />
+              <Route exact path="/contactus" element={<ContactUs />} />
               <Route exact path="/share" element={<Share />} />
               <Route exact path="/feedbacks" element={<FeedBacks />} />
               <Route exact path="/community" element={<Community />} />
@@ -51,8 +53,8 @@ function App() {
             <ToastContainer />
           </Router>
         </Fragment>
-      </EventTriggerProvider>
-    </UserProvider>
+      </UserProvider>
+    </EventTriggerProvider>
   );
 }
 

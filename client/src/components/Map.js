@@ -5,6 +5,7 @@ import { useEventTrigger } from "./EventTriggerContext";
 import { useUserContext } from "./UserContext";
 import MarkerPopup from "./MarkerPopup";
 import { createRoot } from "react-dom/client";
+import RequestModal from "./RequestModal";
 
 const Map = () => {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -16,10 +17,21 @@ const Map = () => {
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
-  const { themeTrigger } = useEventTrigger();
+  const { themeTrigger, requestModalOpen, setRequestModalOpen } =
+    useEventTrigger();
   const { coordinates } = useUserContext();
   const [userLocations, setUserLocations] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState(null);
+
+  const closeRequestModal = () => {
+    setRequestModalOpen(false);
+  };
+
+  const [recmail, setRecMail] = useState(null);
+  const openRequestModal = (recipientemail) => {
+    setRecMail(recipientemail);
+    setRequestModalOpen(true);
+  };
 
   const createCustomMarkerElement = (userData) => {
     const customMarkerElement = document.createElement("div");
@@ -31,7 +43,9 @@ const Map = () => {
     const container = document.createElement("div");
     const root = createRoot(container);
 
-    root.render(<MarkerPopup userData={userData} />);
+    root.render(
+      <MarkerPopup userData={userData} openRequestModal={openRequestModal} />
+    );
 
     // Create a Mapbox GL popup and set its maximum width to 300px
     const popup = new mapboxgl.Popup({ offset: 25 });
@@ -275,6 +289,9 @@ const Map = () => {
           </span>
         </button>
       </div>
+      {requestModalOpen && (
+        <RequestModal closeRequestModal={closeRequestModal} recmail={recmail} />
+      )}
     </div>
   );
 };

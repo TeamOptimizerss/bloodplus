@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
+import { useEventTrigger } from "./EventTriggerContext";
 
-const MarkerPopup = ({ userData }) => {
+const MarkerPopup = ({ userData, openRequestModal }) => {
   const mapsUrl = `https://www.google.com/maps?q=${userData.latitude},${userData.longitude}`;
 
   return (
@@ -31,7 +32,12 @@ const MarkerPopup = ({ userData }) => {
           </a>
         </div>
         <div className="btn-container">
-          <button className="btn">
+          <button
+            className="btn"
+            onClick={() => {
+              openRequestModal(userData.mailid);
+            }}
+          >
             <span>
               <i className="fa-solid fa-bell red"></i>Notify
             </span>

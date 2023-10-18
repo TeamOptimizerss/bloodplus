@@ -9,7 +9,7 @@ const Nav = () => {
   const savedTheme = localStorage.getItem("theme");
   const [isDarkMode, setIsDarkMode] = useState(savedTheme === "dark");
   const { themeTrigger, setThemeTrigger } = useEventTrigger();
-  const { userEmail } = useUserContext();
+  const { userEmail, userName } = useUserContext();
   const [showUserProfile, setShowUserProfile] = useState(false);
 
   const toggleMode = () => {
@@ -88,7 +88,7 @@ const Nav = () => {
             </li>
             {userEmail.length > 0 && (
               <li onClick={toggleUserProfile} className="userprofile">
-                <div>{userEmail.charAt(0)}</div>
+                <div>{userName.charAt(0)}</div>
               </li>
             )}
           </ul>

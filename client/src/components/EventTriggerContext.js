@@ -9,6 +9,7 @@ export const EventTriggerProvider = ({ children }) => {
   const [coordinatesTrigger, setCoordinatesTrigger] = useState(null);
   const [campAddress, setCampAddress] = useState(null);
   const [campCordinates, setCampCordinates] = useState(null);
+  const [requestModalOpen, setRequestModalOpen] = useState(false);
 
   return (
     <EventTriggerContext.Provider
@@ -21,6 +22,8 @@ export const EventTriggerProvider = ({ children }) => {
         setCampAddress,
         campCordinates,
         setCampCordinates,
+        requestModalOpen,
+        setRequestModalOpen,
       }}
     >
       {children}
